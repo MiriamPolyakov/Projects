@@ -1,0 +1,97 @@
+body{
+    background-image: url("../img/רקע\ זז\ 1.webp");
+    background-size: contain;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+#game{
+    width: 600px;
+    height:850px ;
+    border: 20px solid white;
+    margin: auto;
+    margin-top: 5px;
+}
+#charactor{
+    width: 40px;
+    height: 40px;
+    background-color: rgb(238, 255, 0) ;
+    border-radius: 50%;
+    position: relative;
+    top: 100px;
+    left: 190px;
+    z-index: 1000000;
+}
+.block{
+    width: 600px;
+    height: 20px;
+    background-color:white;
+    position: relative;
+    top: 100px;
+    margin-top: -20px;
+}
+.hole{
+    width: 60px;
+    height: 20px;
+    background-color:black;
+    position: relative;
+    top: 100px; 
+    margin-top: -20px;
+}
+#lose{
+    font-size: 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(238, 255, 0) ;
+    text-align: center;
+    justify-self: center;
+    margin-top: 0%;
+}
+#llose{
+    font-size: 100px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(238, 255, 0) ;
+    text-align: center;
+    justify-self: center;
+    margin-top: 0%;
+}
+#win{
+    font-size: 150px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(238, 255, 0) ;
+    text-align: center;
+    justify-self: center;
+    margin-top: 0%;
+}
+#score{
+    margin: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 80px;
+    color:rgb(238, 255, 0)  ;
+    float: left;
+}
+button{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: 25px;
+    padding: 5px 20px;
+    border-radius: 5px;
+  float: right;
+  margin-right: 1px;
+ width: 180px;
+ height: 50px;
+}
+button:hover{
+  background-color:rgb(238, 255, 0) ;
+
+}
+#home_paper{
+    display: inline;
+ float: right;
+margin-right:-600px;
+margin-top: 570px;
+ width: 120px;
+}
+#home_paper:hover{
+    transform: scale(120%);
+}

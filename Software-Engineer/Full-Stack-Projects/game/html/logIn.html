@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../javaScript/logIn.js"></script>
+    <link rel="stylesheet" href="../css/logIn.css">
+    <link rel="stylesheet" href="../javaScript/logIn.js">
+    <title>logIn</title>
+</head>
+
+<body style="justify-content: center;text-align: center;">
+  
+    <div id="joinFrame">
+        <div id="bottonsUp">
+            <button id="logIn" onclick="viewLogIn()" class="UpButton">log in</button>
+            <button id="signIn" onclick="viewSignIn()" class="UpButton">sign in</button>
+        </div>
+        <div id="loginForm">
+
+            <form id="login">
+                <div id="div1">
+                    <h1>Log In</h1>
+                    <label>User Name:</label>
+                    <input type="text" maxlength="15" placeholder="User Name" id="LogInFirstName">
+                </div>
+                <div>
+                <label>Password:</label>
+                <input type="password" maxlength="15" placeholder="password" id="LogInPassword">
+                
+            </div>
+                <button type="submit" onclick="logIn()" id="submit">submit</button>
+            </form>
+        </div>
+        <div id="signInForm">
+            <form id="signin">
+                <h1>Sign In</h1>
+                <label>User Name:</label>
+                <input type="text" maxlength="15" placeholder="User Name" id="FirstName" required minlength="5">
+            
+                <label>Password:</label>
+                <input type="password" maxlength="15" placeholder="password" id="Password" required minlength="5">
+                <br>
+                <button type="submit" onclick="signIn()" id="submit">submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
