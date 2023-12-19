@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+    environment {
+        dockerImageName = 'django_from_jenkins'
+        artifact_registry_image="me-west1-docker.pkg.dev/devconnect-project/miriam-artifacts/my-django-app:v1.0.0"
+        CONTAINER_NAME="django-container"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Define the version as the commit message
+                    def version = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+                    
+                    // Build the application (replace with your build command)
+                    dir('django_web_app'){
+                        sh 'docker build -t my-django-app .'
+                    }
+                    // Run Django tests (replace with your test command)
+                   
+                }
+            }
+        }
+        stage('Test the app'){
+            steps{
+                script{
+                    sh 'docker stop $CONTAINER_NAME'
+                    sh 'docker rm $CONTAINER_NAME'
+                    sh 'docker run -d -p 5000:8000 --name $CONTAINER_NAME my-django-app '
+                
+                // Run the Django tests
+                    dir('django_web_app') {
+                        sh 'docker exec $CONTAINER_NAME python manage.py test'
+                    }
+                    // Check if the app is accessible and returns 200 OK
+                    //def responseHeaders = sh(script: 'docker run -p 5002:8000 -d my-django-app && sleep 5 && curl -I http://localhost:5002', returnStatus: true).trim()
+                    
+                    //def responseCode = responseHeaders =~ /HTTP\/1\.\d (\d+)/
+                    // if (responseCode == '200') {
+                    //     currentBuild.result = 'SUCCESS'
+                    // } else {
+                    //     currentBuild.result = 'FAILURE'
+                    // }
+                }
+            }
+        }
+        
+        stage('Push to Artifact Registry') {
+            when {
+                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+            }
+            steps {
+                script {
+                    // Push the image to your artifact registry (replace with your push command)
+                    sh 'docker tag my-django-app me-west1-docker.pkg.dev/devconnect-project/miriam-artifacts/my-django-app:v1.0.0'
+                    sh 'docker push me-west1-docker.pkg.dev/devconnect-project/miriam-artifacts/my-django-app:v1.0.0'
+                }
+            }
+        }
+
+        stage('Deploy to Production') {
+            when {
+                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+            }
+            steps {
+                script {
+                    // Deploy to your production cluster (replace with your deployment command)
+                    sh 'gcloud container clusters get-credentials miriam-cluster --zone me-west1-a --project devconnect-project'
+                    sh 'kubectl apply -f deployment.yaml'
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'The pipeline failed :('
+        }
+    }
+}

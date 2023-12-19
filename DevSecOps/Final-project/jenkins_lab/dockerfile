@@ -1,0 +1,28 @@
+# Use the latest Python image
+FROM jenkins/jenkins:lts-jdk17
+# Set the working directory in the container
+WORKDIR /app
+# Copy the requirements.txt file and install dependencies
+USER root
+RUN apt-get update -qq \
+    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
+RUN apt-get update  -qq \
+    && apt-get -y install docker.io
+RUN usermod -aG docker jenkins
+# Downloading gcloud package
+RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
+# RUN apt-get install -y gcloud-sdk
+# Installing the package
+RUN mkdir -p /usr/local/gcloud \
+  && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
+  && /usr/local/gcloud/google-cloud-sdk/install.sh --quiet
+
+# Adding the package path to local
+ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
+# RUN chmod 666 /var/run/docker.sock
+# RUN sh -c "(apt update && apt install -y curl) || yum install -y curl || apk add curl"
+# RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# Expose the port your Django app will run on
+EXPOSE 8080
+

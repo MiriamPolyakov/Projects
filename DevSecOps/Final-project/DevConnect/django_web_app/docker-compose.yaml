@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+    image: my-django-app:latest  # Replace with the name of your Django Docker image
+    container_name: my-django-container
+    ports:
+      - "8000:8000"  # Map the Django app's port to the host
+    volumes:
+      - ./volumes  # Mount your Django project directory into the container
+    environment:
+      - DJANGO_SETTINGS_MODULE=myapp.settings  # Replace with your Django settings module
+      - DJANGO_SECRET_KEY=your_secret_key  # Replace with your secret key
+    depends_on:
+      - db
+
+  db:
+    image: sqlite:latest  # Use the official SQLite image
+    container_name: sqlite-container
+    volumes:
+      - db_data:/var/lib/sqlite3
+    environment:
+      - SQLITE_DATABASE=myappdb  # Replace with your database name
+      - SQLITE_USER=myappuser  # Replace with your database user
+      - SQLITE_PASSWORD=yourpassword  # Replace with your database password
+
+volumes:
+  db_data:
