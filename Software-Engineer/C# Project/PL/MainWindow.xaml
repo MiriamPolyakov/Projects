@@ -1,0 +1,27 @@
+﻿<Window x:Class="PL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FFD0D4D6">
+        <!--<Button Content="Admin" x:Name="AdminOption"  Margin="32,147,550,161" 
+                Click="AdminButton_Click" Style="{StaticResource button}"  
+                FontSize="25"  FontStyle="Normal"/>-->
+        <Button Content="New Order" x:Name="NewOrderOption" HorizontalAlignment="Center" Margin="0,147,0,0" VerticalAlignment="Top"
+                FontSize="25"  FontStyle="Normal" Height="104" Width="222"  Click="NewOrderOption_Click" Style="{StaticResource button}" />
+
+        <Button Content="Admin" x:Name="AdminOption" HorizontalAlignment="Center" Margin="-500,147,0,0" VerticalAlignment="Top"
+                FontSize="25"  FontStyle="Normal" Height="104" Width="222"  Click="AdminButton_Click" Style="{StaticResource button}" />
+
+
+        <Button Name="TrackBtn" Content="Track" FontSize="25"  FontStyle="Normal" 
+              Style="{StaticResource button}" Height="104" Width="224" HorizontalAlignment="Left" Margin="536,147,0,0" VerticalAlignment="Top" Click="TrackBtn_Click"/>
+        <TextBox x:Name="OrderNumberToTrack" HorizontalAlignment="Left" Margin="672,225,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="73" RenderTransformOrigin="0.184,0.983" Height="20" />
+        <Label Content="Enter order Number:" HorizontalAlignment="Left" Margin="542,217,0,0" VerticalAlignment="Top" Width="125" Height="35" RenderTransformOrigin="0.462,-0.292" Foreground="#FF076545" FontWeight="Bold"/>
+        <Button Content="play" Name="playBtn" HorizontalAlignment="Left" Style="{StaticResource button}" Margin="667,29,0,0" VerticalAlignment="Top" Height="36" Width="104" Click="playBtn_Click"/>
+
+    </Grid>
+</Window>
